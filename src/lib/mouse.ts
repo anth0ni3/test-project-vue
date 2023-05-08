@@ -5,6 +5,12 @@ interface Options {
 export function mousedown(e: MouseEvent, element: HTMLElement | null, options: Options = {}) {
   const {constraint = window} = options;
 
+  const screenLog = document.querySelector('#screen-log');
+  screenLog.innerText = `
+    Screen X/Y: ${e.screenX}, ${e.screenY}
+    Client X/Y: ${e.clientX}, ${e.clientY}`;
+  // console.log(e);
+
   // get the drag contraint of the draggable
   const elementWrapper = typeof constraint == 'string' ? document.querySelector(constraint) : null;
 
@@ -16,19 +22,15 @@ export function mousedown(e: MouseEvent, element: HTMLElement | null, options: O
 
   function mousemove(e: MouseEvent) {
     // new x - where the mouse is now
-    const newX = prevX - e.clientX;
-    const newY = prevY - e.clientY;
-
-    if (!element) return;
-
+    // const newX = prevX - e.clientX;
+    // const newY = prevY - e.clientY;
+    // if (!element) return;
     //set style to absolute for dragging
-    element.style.position = 'absolute';
-    const rect = element.getBoundingClientRect();
-
+    // element.style.position = 'absolute';
+    // const rect = element.getBoundingClientRect();
     // //element Position
     // const elementPositionX = rect.left + window.pageXOffset;
     // const elementPositionY = rect.top + window.pageYOffset;
-
     // const elX = e.clientX - elementPositionX;
     // const elY = e.clientY - elementPositionY;
     // const isOutside =
@@ -38,19 +40,16 @@ export function mousedown(e: MouseEvent, element: HTMLElement | null, options: O
     //   elY < 0 ||
     //   elX > rect.width ||
     //   elY > rect.height;
-
     // console.log({
     //   elX,
     //   elY,
     //   elementPositionX,
     //   elementPositionY,
     // });
-
-    element.style.left = rect.left - newX + 'px';
-    element.style.top = rect.top - newY + 'px';
-
-    prevX = e.clientX;
-    prevY = e.clientY;
+    // element.style.left = rect.left - newX + 'px';
+    // element.style.top = rect.top - newY + 'px';
+    // prevX = e.clientX;
+    // prevY = e.clientY;
   }
   function mouseup() {
     // remove event listener

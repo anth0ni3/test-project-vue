@@ -1,17 +1,20 @@
 <template>
-  <div class="container" ref="container" @mousedown.self="mousedown($event, container)">
+  <div class="container" ref="container">
     <span class="label">Container Box</span>
     <content />
   </div>
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue';
+import {onMounted, ref} from 'vue';
 import content from './content.vue';
-
-import {mousedown} from '../lib/mouse';
+import {useDrag} from '../hooks/use-drag';
 
 const container = ref<HTMLElement | null>(null);
+
+onMounted(() => {
+  useDrag({target: container});
+});
 </script>
 
 <style lang="postcss" scoped>
